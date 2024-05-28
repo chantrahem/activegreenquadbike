@@ -2,49 +2,55 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Generator</title>
-</head>
-<body>
-    <div class="qr-wrap" id="qr-wrap">
-        <div class="flex-center">
-            <div class="qrcode">
-                <img id="qrimg" alt='QR Code' width='240' height='240'>
-            </div>
-        </div>
-    </div>
-
-    <button onclick="generatePDF()">Download QR Code</button>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <title>Booking Form</title>
     <script>
-        const link = "Your link here"; // Replace 'Your link here' with your actual link
-        const qrUrl = `https://chart.googleapis.com/chart?cht=qr&chs=240x240&chl=${link}&choe=UTF-8`;
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const today = new Date().toISOString().split('T')[0];
+            const ciInput = document.getElementById('ci');
+            const coInput = document.getElementById('co');
 
-        document.getElementById('qrimg').setAttribute('src', qrUrl);
+            ciInput.setAttribute('min', today);
+            ciInput.value = today;
+            coInput.value = new Date(Date.now() + 86400000).toISOString().split('T')[0];
 
-        function generatePDF() {
-            const element = document.getElementById('qr-wrap');
-            var opt = {
-                margin: 0,
-                padding: 0,
-                filename: 'QR_Code.pdf',
-                image: {
-                    type: 'jpeg',
-                    quality: 1
-                },
-                html2canvas: {
-                    scale: 2
-                },
-                jsPDF: {
-                    unit: 'in',
-                    format: 'a5',
-                    orientation: 'portrait'
-                }
-            };
-            html2pdf().set(opt).from(element).save();
+            ciInput.addEventListener('change', () => {
+                const checkInDate = new Date(ciInput.value);
+                const checkOutDate = new Date(checkInDate.getTime() + 86400000);
+                coInput.value = checkOutDate.toISOString().split('T')[0];
+                coInput.setAttribute('min', coInput.value);
+            });
+        });
+
+        function generateAndOpenLink() {
+            const ci = document.getElementById('ci').value;
+            const co = document.getElementById('co').value;
+            
+            if (ci && co) {
+                const baseUrl = 'https://app.inn-connect.com/book2/?p=Hillocks+Hotel+%26+Spa#list';
+                const queryParams = `%7B%22ci%22:%22${ci}%22,%22co%22:%22${co}%22,%22rooms%22:%5B%7B%22adults%22:2%7D%5D%7D`;
+                const fullUrl = `${baseUrl}${queryParams}`;
+                
+                window.open(fullUrl, '_blank');
+            } else {
+                alert('Please enter both check-in and check-out dates.');
+            }
         }
     </script>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: transparent; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0;">
+    <div class="booking-container" style="padding: 20px; border-radius: 8px; display: flex; align-items: center; gap: 10px;">
+        <div class="form-group" style="display: flex; align-items: center; margin-right: 10px;">
+            <label for="ci" style="margin-right: 5px; color: black;">Check-in:</label>
+            <input type="date" id="ci" name="ci" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; width: 150px;">
+        </div>
+        <div class="form-group" style="display: flex; align-items: center; margin-right: 10px;">
+            <label for="co" style="margin-right: 5px; color: black;">Check-out:</label>
+            <input type="date" id="co" name="co" required style="padding: 10px; border: 1px solid #ccc; border-radius: 4px; width: 150px;">
+        </div>
+        <button type="button" class="booking-button" onclick="generateAndOpenLink()" style="padding: 10px 20px; background-color: #07261C; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; transition: background-color 0.3s;">
+            Book Now
+        </button>
+    </div>
 </body>
 </html>
