@@ -29,7 +29,7 @@
         <div class="border w-fit py-1 px-3 rounded-full cursor-pointer" onclick="showSidebar()"><i
                 class="fa-solid fa-xmark"></i></div>
     </div>
-    <div class="sidebar-menu">
+    <nav class="sidebar-menu">
         <?php include 'menu.php' ?>
-    </div>
+    </nav>
 </div>

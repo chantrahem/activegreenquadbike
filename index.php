@@ -14,19 +14,19 @@ include 'templates/header.php';
             ?>
             <!-- end main menu -->
             <div class="w-[1141px] h-screen m-auto">
-                <div class="h-screen w-[900px] flex items-center">
+                <div class="h-screen w-[900px] flex items-center pb-56">
                     <div>
-                        <div class="text-6xl font-bold uppercase mb-8">Villages & Sunset Tours!</div>
-                        <div>Discover the essence of rural Cambodian life as you navigate through charming villages,
-                            interact with friendly locals, and witness the serene beauty of the countryside.</div>
+                        <h1 class="text-6xl font-bold uppercase mb-8">Villages & Sunset Tours!</h1>
+                        <p>Discover the essence of rural Cambodian life as you navigate through charming villages,
+                            interact with friendly locals, and witness the serene beauty of the countryside.</p>
                         <div class="flex items-center mt-8 space-x-4">
                             <div class="grid grid-cols-3 gap-4 text-sm">
-                                <div
-                                    class="py-1 px-8 bg-[#396731] hover:bg-[#E63619] rounded-full uppercase text-center hover:cursor-pointer font-168">
-                                    Programs</div>
-                                <div
-                                    class="py-1 px-8 bg-[#396731] hover:bg-[#E63619] rounded-full uppercase text-center hover:cursor-pointer font-168">
-                                    Gallery</div>
+                                <button
+                                    class="py-2 px-8 bg-[#396731] hover:bg-[#E63619] rounded-full uppercase text-center hover:cursor-pointer font-168">
+                                    Programs</button>
+                                <button
+                                    class="py-2 px-8 bg-[#396731] hover:bg-[#E63619] rounded-full uppercase text-center hover:cursor-pointer font-168">
+                                    Gallery</button>
                             </div>
                         </div>
                     </div>
