@@ -1,0 +1,68 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+#btn-back-to-top {
+  position: fixed;
+  display: none;
+}
+.sticky {
+  background: #f2f2f2;
+  color: #444;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  padding: 5px 0px;
+  transition: ease-in 0.2s;
+  font-size: 8px !important;
+}
+.sticky .logo {
+  height: 45px;
+}
+.inner-shape {
+  background-image: url(../assets/bg/slider-pattern.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  content: "";
+  height: 150px;
+  width: 100%;
+  margin-top: -100px;
+  position: relative;
+}
+
+/* Slidshow */
+
+.slideshow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1s ease-in-out;
+}
+
+/* Menu */
+.main-menu ul {
+  display: flex;
+  align-items: center;
+  column-gap: 2.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+.sidebar-menu ul {
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-menu ul li {
+  padding: 0.5rem 1rem;
+  border-bottom: #f2f2f2 thin dotted;
+}
+.sidebar-menu ul li:hover {
+  background-color: #444;
+  padding: 0.5rem 1rem;
+}
