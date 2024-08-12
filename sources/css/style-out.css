@@ -777,10 +777,6 @@ video {
   margin-top: 2rem;
 }
 
-.-mt-\[116px\] {
-  margin-top: -116px;
-}
-
 .box-border {
   box-sizing: border-box;
 }
@@ -902,10 +898,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-\[calc\(100\%-116px\)\] {
-  height: calc(100% - 116px);
 }
 
 .w-12 {
@@ -2197,6 +2189,11 @@ video {
   padding-right: 1.5rem;
 }
 
+.px-8 {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -2220,11 +2217,6 @@ video {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
-}
-
-.px-8 {
-  padding-left: 2rem;
-  padding-right: 2rem;
 }
 
 .pb-4 {
