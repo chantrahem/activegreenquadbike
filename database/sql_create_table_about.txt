@@ -1,0 +1,25 @@
+CREATE TABLE about(
+    about_id int NOT NULL AUTO_INCREMENT,
+    company_name varchar(255),
+    start_year varchar(255),
+    about_highlight varchar(255),
+    short_description text,
+    about_description text,
+    phone_1 varchar(255),
+    phone_2 varchar(255),
+    email_address varchar(255),
+    full_address varchar(255),
+    telegram varchar(255),
+    whatsapp varchar (255),
+    wechat varchar(255),
+    facebook varchar(255),
+    tiktok varchar(255),
+    twitter varchar(255),
+    instagram varchar(255),
+    linkedin varchar(255),
+    tripadvisor varchar(255),
+    google varchar(255);
+    about_image varchar(255),
+    contact_image varchar(255),
+    PRIMARY KEY (about_id)
+);

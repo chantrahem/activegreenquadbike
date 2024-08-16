@@ -1,0 +1,6 @@
+<span class="icon-[mdi--facebook]" style="width: 20px; height: 20px;"></span>
+<span class="icon-[ic--baseline-tiktok]" style="width: 20px; height: 20px;"></span>
+<span class="icon-[mdi--instagram]" style="width: 20px; height: 20px;"></span>
+<span class="icon-[mdi--linkedin]" style="width: 20px; height: 20px;"></span>
+<span class="icon-[tabler--brand-tripadvisor]" style="width: 20px; height: 20px;"></span>
+<span class="icon-[mdi--google-plus]" style="width: 20px; height: 20px;"></span>

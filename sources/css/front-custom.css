@@ -66,3 +66,16 @@ body {
   background-color: #444;
   padding: 0.5rem 1rem;
 }
+
+/* Button */
+.btn-primary {
+  background-color: #396731;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 0.5rem 2rem;
+  border-radius: 9999px;
+}
+.btn-primary:hover {
+  background-color: #e63619;
+}

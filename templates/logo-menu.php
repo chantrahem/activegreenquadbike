@@ -1,9 +1,10 @@
-<div  id="stickyMenu">
-    <div class="w-full lg:w-[1141px] m-auto flex items-center justify-between py-2 px-4 lg:px-0 bg-[#f2f2f2] lg:bg-transparent">
+<div id="stickyMenu">
+    <div
+        class="w-full lg:w-[1141px] m-auto flex items-center justify-between py-2 px-4 lg:px-0 bg-[#f2f2f2] lg:bg-transparent">
         <!-- logo -->
         <div class="flex justify-center">
-            <img class="logo cursor-pointer h-[45px] lg:h-[100px]" src="/sources/images/logo.png" alt="Cheata Angkor Cambodia Travel"
-                onclick="location.href='/'">
+            <img class="logo cursor-pointer h-[45px] lg:h-[100px]" src="/sources/images/logo.png"
+                alt="Cheata Angkor Cambodia Travel" onclick="location.href='/'">
         </div>
         <!-- Main Menu -->
         <div class="hidden lg:block">
@@ -26,8 +27,9 @@
         <div>
             <div class="text-xl">MENU</div>
         </div>
-        <div class="border w-fit py-1 px-3 rounded-full cursor-pointer" onclick="showSidebar()"><i
-                class="fa-solid fa-xmark"></i></div>
+        <div class="flex items-center cursor-pointer" onclick="showSidebar()">
+        <span class="icon-[ic--baseline-close]" style="width: 24px; height: 24px;"></span>
+        </div>
     </div>
     <nav class="sidebar-menu">
         <?php include 'menu.php' ?>
