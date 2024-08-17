@@ -73,7 +73,7 @@
                         echo '';
                     } else {
                         ?>
-                        <a alt="WeChat" href="https://t.me/<?php echo $wechat; ?>" class="text-[#2f8819]">
+                        <a alt="WeChat" href="weixin://dl/chat?{<?php echo $wechat; ?>}" class="text-[#2f8819]">
                             <span class="icon-[ic--baseline-wechat]" style="width: 60px; height: 60px;"></span>
                         </a>
                         <?php
