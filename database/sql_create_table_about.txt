@@ -21,5 +21,6 @@ CREATE TABLE about(
     google varchar(255);
     about_image varchar(255),
     contact_image varchar(255),
+    sticky_banner_home varchar (255),
     PRIMARY KEY (about_id)
 );

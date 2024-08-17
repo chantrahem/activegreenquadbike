@@ -5,6 +5,7 @@ $short_description = $about_data['short_description'];
 $about_description = $about_data['about_description'];
 $start_year = $about_data['start_year'];
 $about_image = $about_data['about_image'];
+$sticky_banner_home = $about_data['sticky_banner_home'];
 ?>
 <title><?php echo $company_name; ?>, Siem Reap, Cambodia</title>
 </head>
@@ -67,7 +68,7 @@ $about_image = $about_data['about_image'];
             <div class="flex items-center py-16">
                 <div class="w-full">
                     <div class="w-full uppercase font-168 text-center">Our Services</div>
-                    <div class="w-full uppercase font-168 font-semibold text-center text-4xl">What can we do for you?
+                    <div class="w-full uppercase font-168 font-semibold text-center text-4xl">What can serve you?
                     </div>
                     <div class="grid grid-cols-3 gap-8 mt-8">
                         <div class="flex justify-center border border-gray-200 rounded-md shadow-sm">
@@ -174,8 +175,7 @@ $about_image = $about_data['about_image'];
     </div>
     <!-- break -->
     <div class="h-[600px]"
-        style="background: url(sources/images/break-saction.jpg) no-repeat fixed center; background-size: cover;">
-
+        style="background: url(sources/images/<?php echo $sticky_banner_home; ?>) no-repeat fixed center; background-size: cover;">
     </div>
     <!-- Programs -->
     <div class="bg-[#f4f4f4]">
