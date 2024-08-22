@@ -1,0 +1,14 @@
+CREATE TABLE services_and_programs(
+    sp_id int NOT NULL AUTO_INCREMENT,
+    category_list varchar(255),
+    sp_name varchar(255),
+    sp_sub_name varchar(255),
+    sp_price varchar(255),
+    sp_departure_time varchar (255),
+    sp_description text,
+    sp_inclusion text,
+    sp_notes text,
+    sp_banner varchar(255),
+    sp_gallery_image_path varchar(255),
+    PRIMARY KEY (sp_id)
+);
