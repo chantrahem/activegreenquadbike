@@ -3,9 +3,24 @@
         <div>
             <div class="text-2xl font-semibold pb-8">Progams</div>
 
-            <div class="cursor-pointer">
-                Program 1
-            </div>
+
+            <?php
+            $sp3 = "SELECT * FROM services_and_programs WHERE category_list = 'Programs'";
+            $sp_result = $db->query($sp3);
+            if ($sp_result->num_rows >= 0) {
+                while ($sp_data = $sp_result->fetch_assoc()) {
+                    $sp_id = $sp_data['sp_id'];
+                    $sp_name = $sp_data['sp_name'];
+                    ?>
+                    <div class="cursor-pointer flex items-center gap-2" onclick="location.href='/services_and_programs_details.php?id=<?php echo $sp_id; ?>'">
+                        <div class="h-2 w-2 rounded-full bg-gray-200"></div>
+                        <div><?php echo $sp_name; ?></div>
+                    </div>
+                    <?php
+                }
+            }
+            ?>
+
         </div>
         <div>
             <div>
@@ -187,8 +202,8 @@
 <?php
 $db->close();
 ?>
-<script src="./sources/js/script.js"></script>
-<script src="./sources/js/slideshow.js"></script>
+<script src="../sources/js/script.js"></script>
+<script src="../sources/js/slideshow.js"></script>
 </body>
 
 </html>

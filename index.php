@@ -1,4 +1,5 @@
 <?php
+include 'database/connection.php';
 include 'templates/header.php';
 $about_highlight = $about_data['about_highlight'];
 $short_description = $about_data['short_description'];
@@ -94,11 +95,11 @@ $sticky_banner_home = $about_data['sticky_banner_home'];
                                         sunsets
                                         for an unforgettable adventure!
                                     </p>
-                                    
+
                                 </div>
-                                <button onclick="location.href='/program'"
-                                        class="absolute bottom-0 left-0 py-2 px-4 justify-center bg-[#3A6732] hover:bg-[#F56960] w-full rounded-b-md text-white text-sm uppercase">Read
-                                        more...</button>
+                                <button onclick="location.href='/programs.php'"
+                                    class="absolute bottom-0 left-0 py-2 px-4 justify-center bg-[#3A6732] hover:bg-[#F56960] w-full rounded-b-md text-white text-sm uppercase">Read
+                                    more...</button>
                             </div>
                         </div>
                         <?php
@@ -108,9 +109,9 @@ $sticky_banner_home = $about_data['sticky_banner_home'];
                             while ($sp_data = $sp_result->fetch_assoc()) {
                                 $sp_id = $sp_data['sp_id'];
                                 $sp_banner = $sp_data['sp_banner'];
-                                if (is_null($sp_banner) || $sp_banner == ''){
+                                if (is_null($sp_banner) || $sp_banner == '') {
                                     $banner = 'no-image.png';
-                                }else{
+                                } else {
                                     $banner = $sp_banner;
                                 }
                                 $sp_name = $sp_data['sp_name'];
@@ -119,7 +120,7 @@ $sticky_banner_home = $about_data['sticky_banner_home'];
                                 <div class="flex justify-center  rounded-md shadow-lg">
                                     <div class="h-full relative">
                                         <div class="w-full h-[250px] rounded-t-md"
-                                            style="background: #3A6732 url(sources/images/<?php echo $banner?>); background-repeat: no-repeat; background-position: center; background-size: cover;">
+                                            style="background: #3A6732 url(sources/images/<?php echo $banner ?>); background-repeat: no-repeat; background-position: center; background-size: cover;">
                                         </div>
                                         <div class="p-8">
                                             <h2 class="text-center text-xl font-semibold mb-4 uppercase"><?php echo $sp_name; ?>
@@ -128,9 +129,9 @@ $sticky_banner_home = $about_data['sticky_banner_home'];
                                                 <?php echo $sp_short_description; ?>
                                             </p>
                                         </div>
-                                        <button onclick="location.href='/services?id=<?php echo $sp_id; ?>'"
-                                                class="absolute bottom-0 left-0 py-2 px-4 justify-center bg-[#3A6732] hover:bg-[#F56960] w-full rounded-b-md text-white text-sm uppercase">Read
-                                                more...</button>
+                                        <button onclick="location.href='/services_and_programs_details.php?id=<?php echo $sp_id; ?>'"
+                                            class="absolute bottom-0 left-0 py-2 px-4 justify-center bg-[#3A6732] hover:bg-[#F56960] w-full rounded-b-md text-white text-sm uppercase">Read
+                                            more...</button>
                                     </div>
                                 </div>
                                 <?php
@@ -139,9 +140,10 @@ $sticky_banner_home = $about_data['sticky_banner_home'];
                         ?>
 
                     </div>
-                    <div onclick="location.href='/services/'" class="mt-8 text-sm uppercase hover:cursor-pointer flex items-center justify-center">
-                        <span>More Services</span>
-                        <span class="icon-[material-symbols-light--more-up]" style="width: 20px; height: 20px;"></span>
+                    <div onclick="location.href='/services.php'"
+                        class="mt-16 text-sm uppercase hover:cursor-pointer flex justify-center gap-1 italic">
+                        <span>See More Services</span>
+                        <span class="icon-[material-symbols-light--more-up]" style="width: 16px; height: 16px;"></span>
                     </div>
                 </div>
             </div>
@@ -154,9 +156,70 @@ $sticky_banner_home = $about_data['sticky_banner_home'];
     </div>
     <!-- Programs -->
     <div class="bg-[#f4f4f4]">
-        <div class="w-[1200px] m-auto">
 
-        </div>
+        
+            <div class="flex items-center px-0 lg:px-16 py-16">
+                <div class="w-full">
+                    <div class="flex items-center gap-2 justify-center">
+                        <div class="w-16 h-[2px] bg-[#F56960] rounded-full">&nbsp;</div>
+                        <h3 class="uppercase font-168 text-[#F56960] font-semibold text-sm">Our Popular Programs
+                        </h3>
+                    </div>
+                    <div class="w-full uppercase font-168 font-semibold text-center text-xl">Villages & Sunset Tours
+                    </div>
+                    <div class="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16 mt-8 px-8 lg:px-0">
+                        <?php
+                        $sp2 = "SELECT * FROM services_and_programs WHERE category_list = 'Programs' AND is_featured = 'Yes'";
+                        $sp_result = $db->query($sp2);
+                        if ($sp_result->num_rows >= 0) {
+                            while ($sp_data = $sp_result->fetch_assoc()) {
+                                $sp_id = $sp_data['sp_id'];
+                                $sp_banner = $sp_data['sp_banner'];
+                                if (is_null($sp_banner) || $sp_banner == '') {
+                                    $banner = 'no-image.png';
+                                } else {
+                                    $banner = $sp_banner;
+                                }
+                                $sp_name = $sp_data['sp_name'];
+                                $sp_short_description = $sp_data['sp_short_description'];
+                                ?>
+                                <div class="flex flex-col lg:grid lg:grid-cols-2 rounded-md shadow-xl border">
+                                    <div class="w-full h-[250px] lg:h-[300px] rounded-t-md lg:rounded-tr-none lg:rounded-l-md"
+                                        style="background: #3A6732 url(sources/images/<?php echo $banner ?>); background-repeat: no-repeat; background-position: center; background-size: cover;">
+                                    </div>
+                                    <div class="relative">
+                                        <div class="p-8">
+                                            <h2 class="text-xl font-semibold mb-4 uppercase text-center lg:text-left">
+                                                <?php echo $sp_name; ?>
+                                            </h2>
+                                            <p class="mb-8 text-center lg:text-justify">
+                                                <?php echo $sp_short_description; ?>
+                                            </p>
+                                        </div>
+                                        <button onclick="location.href='/services_and_programs_details.php?id=<?php echo $sp_id; ?>'"
+                                            class="w-full lg:w-auto absolute bottom-0 right-0 py-2 px-8 justify-end bg-[#3A6732] hover:bg-[#F56960] rounded-b-md lg:rounded-b-none lg:rounded-br-md text-white text-sm uppercase">Read
+                                            more...</button>
+                                    </div>
+
+                                </div>
+                                <?php
+                            }
+                        }
+                        if ($sp_result->num_rows == 0) {
+                            echo 'There is no program feature available...';
+                        }
+                        ?>
+
+                    </div>
+                    <div onclick="location.href='/programs.php'"
+                        class="mt-16 text-sm uppercase hover:cursor-pointer flex justify-center gap-1 italic">
+                        <span>Explore More Programs</span>
+                        <span class="icon-[material-symbols-light--more-up]" style="width: 16px; height: 16px;"></span>
+                    </div>
+                </div>
+            </div>
+        
+
     </div>
     <!-- Footer -->
     <?php include 'templates/footer.php' ?>
