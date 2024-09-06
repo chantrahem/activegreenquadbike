@@ -1,0 +1,112 @@
+<?php include 'header.php' ?>
+<style>
+    /* Initially hide the delete button */
+    .delete-button {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    /* Show delete button on hover */
+    .image-container:hover .delete-button {
+        opacity: 1;
+    }
+</style>
+<title>Home Slider</title>
+</head>
+
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-gray-800 text-white flex-shrink-0 fixed h-screen z-50">
+        <div class="p-4 text-2xl font-bold border-b">Admin</div>
+        <?php include 'nav.php' ?>
+    </aside>
+    <!-- Main Content -->
+    <div class="flex-1" style="margin-left: 256px;">
+        <header class="flex items-center justify-between fixed top-0 p-4 bg-[#F56960] text-white"
+            style="width: calc(100% - 256px);">
+            <h1 class="text-2xl font-bold">Home Slider</h1>
+            <div>
+                <button onclick="location.href='../logout'" class="text-white rounded-lg">
+                    <span class="icon-[mdi--sign-out]" style="width: 24px; height: 24px;"></span>
+                </button>
+            </div>
+        </header>
+        <div class="" style="height: 80px;">&nbsp;</div>
+        <section class="p-4 mx-4 bg-white shadow rounded-lg">
+            <section class="mb-10">
+                <h2 class="text-2xl font-bold mb-4">Upload New Images</h2>
+                <form action="home_slider.php" method="POST" enctype="multipart/form-data"
+                    class="bg-white p-6 rounded-lg shadow-lg">
+                    <input type="file" name="images[]" multiple
+                        class="block w-full text-gray-700 py-2 px-3 border border-gray-300 rounded mb-4">
+                    <button type="submit" name="upload" class="bg-blue-500 text-white px-4 py-2 rounded">Upload
+                        Images</button>
+                </form>
+            </section>
+
+            <!-- Gallery Images -->
+            <section>
+                <h2 class="text-2xl font-bold mb-4">Uploaded Images</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    <?php
+                    // Define image folder
+                    $image_dir = "../slider_images/";
+
+                    // Handle image upload
+                    if (isset($_POST['upload'])) {
+                        $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
+                        $uploaded_files = $_FILES['images'];
+
+                        for ($i = 0; $i < count($uploaded_files['name']); $i++) {
+                            $imageFileType = strtolower(pathinfo($uploaded_files["name"][$i], PATHINFO_EXTENSION));
+                            $check = getimagesize($uploaded_files["tmp_name"][$i]);
+
+                            // Check if image file is a real image and if it is an allowed type
+                            if ($check !== false && in_array($imageFileType, $allowed_types)) {
+                                // Generate a new name for the image using the current date and time
+                                $new_filename = 'active_green_quad_bike_' . date('Ymd_His') . '.' . $imageFileType;
+                                $target_file = $image_dir . $new_filename;
+
+                                // Move the uploaded file to the target directory
+                                if (move_uploaded_file($uploaded_files["tmp_name"][$i], $target_file)) {
+                                    echo "<p class='text-green-500'>The file " . htmlspecialchars($new_filename) . " has been uploaded.</p>";
+                                } else {
+                                    echo "<p class='text-red-500'>Sorry, there was an error uploading " . htmlspecialchars($uploaded_files["name"][$i]) . ".</p>";
+                                }
+                            } else {
+                                echo "<p class='text-red-500'>" . htmlspecialchars($uploaded_files["name"][$i]) . " is not an allowed file type or is not an image.</p>";
+                            }
+                        }
+                    }
+
+                    // Handle image deletion
+                    if (isset($_POST['delete'])) {
+                        $file_to_delete = $image_dir . $_POST['image_name'];
+                        if (file_exists($file_to_delete)) {
+                            unlink($file_to_delete);
+                            echo "<p class='text-green-500'>The file " . htmlspecialchars($_POST['image_name']) . " has been deleted.</p>";
+                        } else {
+                            echo "<p class='text-red-500'>Sorry, the file does not exist.</p>";
+                        }
+                    }
+
+                    // Display images
+                    $images = glob($image_dir . "*.{jpg,jpeg,png,gif,JPG,JPEG,PNG,GIF}", GLOB_BRACE);
+
+                    foreach ($images as $image) {
+                        $image_name = basename($image);
+                        echo "<div class='relative image-container'>";
+                        echo "<img src='" . $image . "' alt='Gallery Image' class='w-full h-auto object-cover rounded-lg shadow-lg'>";
+                        echo "<form action='home_slider.php' method='POST' class='absolute top-2 right-2 delete-button'>";
+                        echo "<input type='hidden' name='image_name' value='" . $image_name . "'>";
+                        echo "<button type='submit' name='delete' class='bg-red-500 text-white px-2 py-1 rounded'>Delete</button>";
+                        echo "</form>";
+                        echo "</div>";
+                    }
+                    ?>
+                </div>
+            </section>
+        </section>
+    </div>
+
+    <?php include 'footer.php' ?>

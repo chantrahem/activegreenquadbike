@@ -1,6 +1,6 @@
 <!-- top menu -->
-<div class="border-b border-b-gray-300 py-3 text-sm hidden lg:block">
-    <div class="w-[1141px] m-auto flex items-center justify-between">
+<div class="border-b border-b-gray-300 py-3 text-sm hidden lg:block text-white">
+    <div class="w-[1200px] m-auto flex items-center justify-between">
         <div class="flex items-center gap-6">
             <?php
             if (empty($phone_1)) {

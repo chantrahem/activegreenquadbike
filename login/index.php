@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Master Admin login
         $_SESSION['loggedin'] = 'Master Admin';
         $_SESSION['UserID'] = '0';
-        header("Location: ../backend");
+        header("Location: ../backend/dashboard.php");
         exit();
     } elseif (empty($user) && empty($pass)) {
         $errorMessage = "Please input username and password.";
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($result && $result->num_rows > 0) {
             $_SESSION['loggedin'] = $user_display_name;
             $_SESSION['user_id'] = $user_id;
-            header("Location: ../backend");
+            header("Location: ../backend/dashboard.php");
             exit();
         } else {
             $errorMessage = "Incorrect username or password, please try again.";

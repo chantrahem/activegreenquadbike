@@ -1,18 +1,18 @@
-<div class="bg-[#383838] text-white py-16 px-8 lg:px-0">
-    <div class="lg:grid lg:grid-cols-3 w-full lg:w-[1141px] lg:m-auto font-mon gap-x-16">
+<div class="bg-[#383838] text-white py-16 px-4 lg:px-0">
+    <div class="lg:grid lg:grid-cols-3 w-full lg:w-[1200px] lg:m-auto font-mon gap-x-16">
         <div>
             <div class="text-2xl font-semibold pb-8">Progams</div>
 
 
             <?php
-            $sp3 = "SELECT * FROM services_and_programs WHERE category_list = 'Programs'";
+            $sp3 = "SELECT * FROM services_and_programs WHERE category_list = 'Program'";
             $sp_result = $db->query($sp3);
             if ($sp_result->num_rows >= 0) {
                 while ($sp_data = $sp_result->fetch_assoc()) {
                     $sp_id = $sp_data['sp_id'];
                     $sp_name = $sp_data['sp_name'];
                     ?>
-                    <div class="cursor-pointer flex items-center gap-2" onclick="location.href='/services_and_programs_details.php?id=<?php echo $sp_id; ?>'">
+                    <div class="cursor-pointer flex items-center gap-2" onclick="location.href='/services_and_programs_details.php?spid=<?php echo $sp_id; ?>'">
                         <div class="h-2 w-2 rounded-full bg-gray-200"></div>
                         <div><?php echo $sp_name; ?></div>
                     </div>
@@ -204,6 +204,7 @@ $db->close();
 ?>
 <script src="../sources/js/script.js"></script>
 <script src="../sources/js/slideshow.js"></script>
+<script src="../sources/js/slider.js"></script>
 </body>
 
 </html>

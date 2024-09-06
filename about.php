@@ -1,5 +1,4 @@
 <?php
-include 'database/connection.php';
 include 'templates/header.php';
 $about_highlight = $about_data['about_highlight'];
 $short_description = $about_data['short_description'];
@@ -34,11 +33,11 @@ $sticky_banner_home = $about_data['sticky_banner_home'];
                 <div>
                     <div class="flex items-center gap-2">
                         <div class="w-16 h-[2px] bg-[#F56960] rounded-full">&nbsp;</div>
-                        <h3 class="uppercase font-168 text-[#F56960] font-semibold text-sm">Since
+                        <h3 class="uppercase text-[#F56960] font-semibold text-sm">Since
                             <?php echo $start_year; ?>
                         </h3>
                     </div>
-                    <h2 class="text-xl lg:text-2xl mb-8 uppercase font-semibold font-168">
+                    <h2 class="text-xl lg:text-2xl mb-8 uppercase font-semibold">
                         <?php echo $company_name; ?>
                     </h2>
                     <p class="text-justify">

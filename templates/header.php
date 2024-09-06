@@ -18,6 +18,8 @@ $linkedin = $about_data['linkedin'];
 $instagram = $about_data['instagram'];
 $tripadvisor = $about_data['tripadvisor'];
 $google = $about_data['google'];
+$favicon = $about_data['favicon'];
+$logo = $about_data['logo'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,8 +29,4 @@ $google = $about_data['google'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./sources/css/style-out.css">
     <link rel="stylesheet" href="./sources/css/front-custom.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-    <link rel="icon" href="./sources/images/favicon.ico">
+    <link rel="icon" href="./sources/images/<?php echo $favicon; ?>">

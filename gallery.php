@@ -18,40 +18,71 @@ $sticky_banner_home = $about_data['sticky_banner_home'];
         include 'templates/logo-menu.php';
         ?>
         <!-- end main menu -->
-        <div class="w-full lg:w-[1141px] h-[600px] m-auto text-center">
-            <div class="h-[600px] w-full flex flex-col items-center justify-center pb-16 lg:pb-56 px-4 lg:px-0 uppercase">
+        <div class="w-full lg:w-[1200px] h-[600px] m-auto text-center">
+            <div
+                class="h-[600px] w-full flex flex-col items-center justify-center pb-16 lg:pb-56 px-4 lg:px-0 uppercase">
                 <h1 class="text-4xl lg:text-6xl font-bold">Gallery</h1>
             </div>
         </div>
     </div>
 
-    <div class="w-full lg:w-[1200px] m-auto">
-        <div class="flex items-center py-16 px-8 lg:px-0">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-16">
-                <div>
-                    <div class="flex items-center gap-2">
-                        <div class="w-16 h-[2px] bg-[#F56960] rounded-full">&nbsp;</div>
-                        <h3 class="uppercase font-168 text-[#F56960] font-semibold text-sm">Since
-                            <?php echo $start_year; ?>
-                        </h3>
-                    </div>
-                    <h2 class="text-xl lg:text-2xl mb-8 uppercase font-semibold font-168">
-                        <?php echo $company_name; ?>
-                    </h2>
-                    <p class="text-justify">
-                        <?php echo $about_description; ?>
-                    </p>
-                </div>
-                <div class="bg-no-repeat bg-center bg-cover border h-64 lg:h-auto mt-8 lg:mt-0"
-                    style="background: #3A6732 url(sources/images/<?php echo $about_image; ?>); background-repeat: no-repeat; background-position: center; background-size: cover;">
-                    &nbsp;
-                </div>
-            </div>
+    <div class="w-full lg:w-[1200px] m-auto py-8 lg:py-16 px-4 lg:px-0">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            <?php
+            $image_types = array("jpg", "JPG", "jpeg", "JPEG", "png", "PNG", "gif", "GIF");
+            $images = [];
+
+            foreach ($image_types as $type) {
+                $images = array_merge($images, glob("sources/images/gallery/*." . $type));
+            }
+
+            foreach ($images as $index => $image) {
+                echo "<div class='gallery-item overflow-hidden rounded-lg shadow-lg'>";
+                echo "<img src='" . $image . "' alt='Gallery Image' class='cursor-pointer w-full h-auto object-cover' data-index='" . $index . "' onclick='openPopup(" . $index . ")'>";
+                echo "</div>";
+            }
+            ?>
         </div>
+
+        ...
+<!-- Popup Modal -->
+<div id="popup" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75 hidden z-50">
+    <span class="absolute top-0 right-0 text-white text-5xl font-bold cursor-pointer p-4"
+        onclick="closePopup()">&times;</span>
+    <div class="relative">
+        <img id="popup-img" class="max-w-full max-h-screen mx-auto">
+        <a class="absolute top-1/2 left-0 transform -translate-y-1/2 text-white text-4xl font-bold p-4 cursor-pointer"
+            onclick="changeImage(-1)">&#10094;</a>
+        <a class="absolute top-1/2 right-0 transform -translate-y-1/2 text-white text-4xl font-bold p-4 cursor-pointer"
+            onclick="changeImage(1)">&#10095;</a>
     </div>
-    <!-- break -->
-    <div class="h-[600px]"
-        style="background: url(sources/images/<?php echo $sticky_banner_home; ?>) no-repeat fixed center; background-size: cover;">
-    </div>
-    <!-- Footer -->
-    <?php include 'templates/footer.php' ?>
+</div>
+
+<!-- JavaScript -->
+<script>
+var images = <?php echo json_encode($images); ?>;
+var currentIndex = 0;
+
+function openPopup(index) {
+    currentIndex = index;
+    document.getElementById('popup-img').src = images[currentIndex];
+    document.getElementById('popup').classList.remove('hidden');
+}
+
+function closePopup() {
+    document.getElementById('popup').classList.add('hidden');
+}
+
+function changeImage(direction) {
+    currentIndex += direction;
+    if (currentIndex < 0) {
+        currentIndex = images.length - 1;
+    } else if (currentIndex >= images.length) {
+        currentIndex = 0;
+    }
+    document.getElementById('popup-img').src = images[currentIndex];
+}
+</script>
+
+<!-- Footer -->
+<?php include 'templates/footer.php' ?>
