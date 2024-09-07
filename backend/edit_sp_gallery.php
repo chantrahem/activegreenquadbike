@@ -1,11 +1,17 @@
 <?php
 include 'header.php';
 $ms = '';
-$finish_id = isset($_GET['finish_id']) ? intval($_GET['finish_id']) : 0;
-$sp = "SELECT * FROM services_and_programs WHERE sp_id = $finish_id";
+$editid = isset($_GET['editid']) ? intval($_GET['editid']) : 0;
+$sp = "SELECT * FROM services_and_programs WHERE sp_id = $editid";
 $result = $db->query($sp);
 $data = $result->fetch_assoc();
 $category_list = $data['category_list'];
+
+if($category_list == 'Service' ){
+    $back_link = 'service.php';
+}else{
+    $back_link = 'program.php';
+}
 $sp_gallery_image_path = $data['sp_gallery_image_path'];
 
 if (empty($sp_gallery_image_path)) {
@@ -77,7 +83,7 @@ if (isset($_POST['delete'])) {
         $ms = "<p class='text-red-500'>Sorry, the file does not exist.</p>";
     }
     // Refresh the page after deletion
-    header("Location: finishing_sp_3.php?finish_id=$finish_id&delete_status=1");
+    header("Location: finishing_sp_3.php?editid=$editid&delete_status=1");
     exit();
 }
 ?>
@@ -95,7 +101,7 @@ if (isset($_POST['delete'])) {
     }
 </style>
 
-<title>Adding <?php echo htmlspecialchars($category_list); ?></title>
+<title>Update <?php echo htmlspecialchars($category_list); ?></title>
 </head>
 
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
@@ -108,7 +114,7 @@ if (isset($_POST['delete'])) {
     <div class="flex-1" style="margin-left: 256px;">
         <header class="flex items-center justify-between fixed top-0 p-4 bg-gray-700 text-white"
             style="width: calc(100% - 256px);">
-            <h1 class="text-2xl font-bold">Adding <?php echo htmlspecialchars($category_list); ?>...</h1>
+            <h1 class="text-2xl font-bold">Update <?php echo htmlspecialchars($category_list); ?>...</h1>
             <?php include 'sign-out.php' ?>
         </header>
         <div class="" style="height: 80px;">&nbsp;</div>
@@ -118,7 +124,7 @@ if (isset($_POST['delete'])) {
                 class="flex items-center justify-between w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm dark:text-gray-400 sm:text-base dark:bg-gray-800 dark:border-gray-700 sm:p-4 sm:space-x-4 rtl:space-x-reverse">
                 <div class="flex items-center gap-4">
                     <li class="flex items-center cursor-pointer"
-                        onclick="location.href='finishing_sp_1.php?finish_id=<?php echo $finish_id; ?>'">
+                        onclick="location.href='edit_sp_general_info.php?editid=<?php echo $editid; ?>'">
                         <span
                             class="flex items-center justify-center w-5 h-5 me-2 text-xs border border-gray-500 rounded-full shrink-0 dark:border-gray-400">1</span>
                         <span>General Info</span>
@@ -129,7 +135,7 @@ if (isset($_POST['delete'])) {
                         </svg>
                     </li>
                     <li class="flex items-center cursor-pointer"
-                        onclick="location.href='finishing_sp_2.php?finish_id=<?php echo $finish_id; ?>'">
+                        onclick="location.href='edit_sp_featured_image.php?editid=<?php echo $editid; ?>'">
                         <span
                             class="flex items-center justify-center w-5 h-5 me-2 text-xs border border-gray-500 rounded-full shrink-0 dark:border-gray-400">2</span>
                         <span>Featured Image</span>
@@ -146,12 +152,12 @@ if (isset($_POST['delete'])) {
                     </li>
                 </div>
                 <div class="cursor-pointer bg-green-700 text-white px-4 py-1"
-                    onclick="location.href='<?php echo $back_link; ?>'">Finish</div>
+                    onclick="location.href='<?php echo $back_link; ?>'">Close</div>
             </ol>
 
             <section class="pt-8">
                 <h2 class="text-2xl font-bold mb-4">Select images to upload</h2>
-                <form action="finishing_sp_3.php?finish_id=<?php echo $finish_id; ?>" method="POST"
+                <form action="finishing_sp_3.php?editid=<?php echo $editid; ?>" method="POST"
                     enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-md">
                     <input type="file" name="images[]" multiple accept="image/*"
                         class="block w-full px-4 py-2 mb-4 border rounded-lg" />
@@ -177,7 +183,7 @@ if (isset($_POST['delete'])) {
                             <div class="relative image-container">
                                 <img src="<?php echo $image_dir . htmlspecialchars($image_name); ?>" alt="Uploaded Image"
                                     class="w-full h-auto rounded-lg shadow-md">
-                                <form action="finishing_sp_3.php?finish_id=<?php echo $finish_id; ?>" method="POST"
+                                <form action="finishing_sp_3.php?editid=<?php echo $editid; ?>" method="POST"
                                     class="absolute top-0 right-0 p-2">
                                     <input type="hidden" name="image_name" value="<?php echo htmlspecialchars($image_name); ?>">
                                     <button type="submit" name="delete"

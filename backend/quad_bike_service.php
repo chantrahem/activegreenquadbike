@@ -63,14 +63,10 @@ if (isset($_POST['save'])) {
     </aside>
     <!-- Main Content -->
     <div class="flex-1" style="margin-left: 256px;">
-        <header class="flex items-center justify-between fixed top-0 p-4 bg-[#F56960] text-white"
+        <header class="flex items-center justify-between fixed top-0 p-4 bg-gray-700 text-white"
             style="width: calc(100% - 256px);">
             <h1 class="text-2xl font-bold">Quad Bike Service</h1>
-            <div>
-                <button onclick="location.href='../logout'" class="text-white rounded-lg">
-                    <span class="icon-[mdi--sign-out]" style="width: 24px; height: 24px;"></span>
-                </button>
-            </div>
+            <?php include 'sign-out.php' ?>
         </header>
         <div class="" style="height: 80px;">&nbsp;</div>
         <section class="p-4 mx-4 bg-white shadow rounded-lg">

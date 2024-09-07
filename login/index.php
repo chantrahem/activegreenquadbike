@@ -6,8 +6,8 @@ $errorMessage = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     include '../database/connection.php'; // Include database configuration
 
-    $user = $_POST["user"];
-    $pass = $_POST["pass"];
+    $user = trim($_POST["user"]);
+    $pass = trim($_POST["pass"]);
 
     if ((md5($user) == "9f706ab85924bd1aa5f9b3c79f7490bd") && (md5($pass) == "0fc29d43c79970f1d3fa34e0d08709de")) {
         // Master Admin login
@@ -22,18 +22,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (empty($pass)) {
         $errorMessage = "Please input password.";
     } else {
-        $pass = md5($_POST["pass"]);
-        $query = "SELECT * FROM users WHERE user_name = '$user' AND user_password = '$pass'";
-        $result = $db->query($query);
+        $pass = md5($pass); // Hash the password
+        $stmt = $db->prepare("SELECT user_fullname, user_email, user_id FROM users WHERE user_email = ? AND user_password = ?");
+        $stmt->bind_param("ss", $user, $pass);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
         if ($result && $result->num_rows > 0) {
-            $_SESSION['loggedin'] = $user_display_name;
-            $_SESSION['user_id'] = $user_id;
+            $row = $result->fetch_assoc();
+            $_SESSION['loggedin'] = $row['user_email'];
+            $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['user_fullname'] = $row['user_fullname'];
             header("Location: ../backend/dashboard.php");
             exit();
         } else {
             $errorMessage = "Incorrect username or password, please try again.";
         }
+        $stmt->close();
     }
     $db->close();
 }
@@ -57,42 +62,35 @@ ob_end_flush();
     <title>Login</title>
 </head>
 
-<!-- Login  with database MSQL -->
-
 <body class="bg-gradient-to-b from-[#ff5050] to-[#3448ad] h-screen px-4 md:px-0 font-qrmms">
     <div class="w-full md:w-[400px] m-auto flex items-center h-screen">
         <div class="bg-white rounded-[10px] w-full py-4 px-4 md:py-12 md:px-8">
-            <!-- <div class="text-center text-2xl md:text-4xl pb-4 md:pb-8 font-semibold text-[#3448ad]">
-                <div>សូមស្វាគមន៍</div>
-                <div class="text-sm">Welcome</div>
-            </div> -->
             <form name="loginForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
                 <div>
-                    <div class="text-[#3448ad] font-semibold text-xl">Username:</div>
-                    <div class=""><input
+                    <div class="text-[#3448ad] font-semibold text-xl">E-mail <span class="text-red-700">*</span></div>
+                    <div class="">
+                        <input
                             class="w-full border-b border-gray-400 bg-white px-2 py-2 outline-none rounded-md mb-4 md:mb-8 mt-2 text-sm"
-                            type="text" name="user" id="user" placeholder="username"
-                            value="<?= isset($_POST['user']) ? $_POST['user'] : ''; ?>"></div>
-                    <div class="text-[#3448ad] font-semibold text-xl">Password:</div>
-                    <div class=""><input
+                            type="text" name="user" id="user" placeholder="E-mail"
+                            value="<?= htmlspecialchars(isset($_POST['user']) ? $_POST['user'] : ''); ?>">
+                    </div>
+                    <div class="text-[#3448ad] font-semibold text-xl">Password <span class="text-red-700">*</span></div>
+                    <div class="">
+                        <input
                             class="w-full border-b border-gray-400 bg-white px-2 py-2 outline-none rounded-md mb-4 md:mb-8 mt-2 text-sm"
-                            type="password" name="pass" id="pass" placeholder="password"></div>
-                    <div class="text-center"><input
+                            type="password" name="pass" id="pass" placeholder="Password">
+                    </div>
+                    <div class="text-center">
+                        <input
                             class="btn bg-[#3448ad] text-white px-6 py-2 rounded-md cursor-pointer" type="submit"
-                            value="LOGIN"></div>
+                            value="LOGIN">
+                    </div>
                     <div class="text-center text-red-600 text-sm my-8">
-                        <?php echo $errorMessage; ?>
+                        <?php echo htmlspecialchars($errorMessage); ?>
                     </div>
                 </div>
             </form>
-            <!-- <div class="text-center text-sm">
-                <div>ដំណើរការដោយ</div>
-                <div class="text-[12px] -mt-2">Powered by</div>
-                <a href="http://qrmms.com/" target="_blank" rel="noopener noreferrer">
-                    <img class="w-[85px] m-auto" src="../assets/logo/logo-grey.png" alt="QRMMS">
-            </div> -->
         </div>
-    </div>
     </div>
 </body>
 

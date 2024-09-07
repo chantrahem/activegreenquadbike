@@ -39,7 +39,7 @@ if (!empty($_GET['delete'])) {
             }
 
             // Success message with popup
-            $msg = "Menu item is deleted successfully. Please click OK to continue.";
+            $msg = "Service item is deleted successfully. Please click OK to continue.";
             echo "
                 <!-- Modal HTML -->
                 <div id='popup' class='fixed inset-0 hidden bg-black bg-opacity-50 z-50'>
@@ -84,14 +84,10 @@ if (!empty($_GET['delete'])) {
     </aside>
     <!-- Main Content -->
     <div class="flex-1" style="margin-left: 256px;">
-        <header class="flex items-center justify-between fixed top-0 p-4 bg-[#F56960] text-white"
+        <header class="flex items-center justify-between fixed top-0 p-4 bg-gray-700 text-white"
             style="width: calc(100% - 256px);">
             <h1 class="text-2xl font-bold">Service</h1>
-            <div>
-                <button onclick="location.href='../logout'" class="text-white rounded-lg">
-                    <span class="icon-[mdi--sign-out]" style="width: 24px; height: 24px;"></span>
-                </button>
-            </div>
+            <?php include 'sign-out.php' ?>
         </header>
         <div class="" style="height: 80px;">&nbsp;</div>
         <section class="p-4 mx-4 bg-white shadow rounded-lg">
@@ -125,7 +121,7 @@ if (!empty($_GET['delete'])) {
                             <div><?php echo $sp_short_description; ?></div>
                         </div>
                         <div class="p-4 flex items-center justify-center gap-4">
-                            <a href="edit_sp.php?edit=<?php echo $sp_id ?>"
+                            <a href="edit_sp_general_info.php?editid=<?php echo $sp_id ?>"
                                 class="block text-white bg-green-600 rounded-md px-4 py-2">Edit</a>
                             <a href="#" class="block text-white bg-red-500 rounded-md px-4 py-2" data-id="<?php echo $sp_id ?>"
                                 onclick="confirmDelete(this)">Delete</a>

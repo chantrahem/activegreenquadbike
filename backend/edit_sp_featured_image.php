@@ -1,15 +1,15 @@
 <?php
 include 'header.php';
 $ms = '';
-$finish_id = $_GET['finish_id'];
+$editid = $_GET['editid'];
 
-if (isset($_POST['add-banner'])) {
+if (isset($_POST['save-banner'])) {
     $filename = $_FILES["uploadImage"]["name"];
     $tempname = $_FILES["uploadImage"]["tmp_name"];
 
     // Check if an image is selected
     if (empty($filename)) {
-        $ms = "Please select an image to add.";
+        $ms = "Please select an image to update.";
     } else {
         // Generate a random number based on the current date and time
         $randomNumber = date('YmdHis') . rand(1000, 9999);
@@ -20,7 +20,7 @@ if (isset($_POST['add-banner'])) {
         $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
         // Fetch the old image filename
-        $query = "SELECT sp_banner FROM services_and_programs WHERE sp_id=$finish_id";
+        $query = "SELECT sp_banner FROM services_and_programs WHERE sp_id=$editid";
         $result = $db->query($query);
         $data = $result->fetch_assoc();
         $oldImage = $data['sp_banner'];
@@ -33,10 +33,10 @@ if (isset($_POST['add-banner'])) {
         // Move the new uploaded file with the new name
         if (move_uploaded_file($tempname, $folder)) {
             // Only assign the $update query if the file was successfully uploaded
-            $update = "UPDATE services_and_programs SET sp_banner='$newFilename' WHERE sp_id=$finish_id";
+            $update = "UPDATE services_and_programs SET sp_banner='$newFilename' WHERE sp_id=$editid";
 
             if ($db->query($update) === TRUE) {
-                $ms = "Add successfully.";
+                $ms = "Update successfully.";
             } else {
                 $ms = "Something went wrong, please check: " . $db->error;
             }
@@ -46,13 +46,18 @@ if (isset($_POST['add-banner'])) {
     }
 }
 
-$sp = "SELECT * FROM services_and_programs WHERE sp_id = $finish_id";
+$sp = "SELECT * FROM services_and_programs WHERE sp_id = $editid";
 $result = $db->query($sp);
 $data = $result->fetch_assoc();
 $category_list = $data['category_list'];
+if($category_list == 'Service' ){
+    $back_link = 'service.php';
+}else{
+    $back_link = 'program.php';
+}
 $sp_banner = $data['sp_banner'];
 ?>
-<title>Adding <?php echo $category_list ?></title>
+<title>Update <?php echo $category_list ?></title>
 </head>
 
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
@@ -65,7 +70,7 @@ $sp_banner = $data['sp_banner'];
     <div class="flex-1" style="margin-left: 256px;">
         <header class="flex items-center justify-between fixed top-0 p-4 bg-gray-700 text-white"
             style="width: calc(100% - 256px);">
-            <h1 class="text-2xl font-bold">Adding <?php echo $category_list ?>...</h1>
+            <h1 class="text-2xl font-bold">Update <?php echo $category_list ?>...</h1>
             <?php include 'sign-out.php' ?>
         </header>
         <div class="" style="height: 80px;">&nbsp;</div>
@@ -75,7 +80,7 @@ $sp_banner = $data['sp_banner'];
                 class="flex items-center justify-between w-full p-3 space-x-2 text-sm font-medium text-center text-gray-500 bg-white border border-gray-200 rounded-lg shadow-sm dark:text-gray-400 sm:text-base dark:bg-gray-800 dark:border-gray-700 sm:p-4 sm:space-x-4 rtl:space-x-reverse">
                 <div class="flex items-center gap-4">
                     <li class="flex items-center cursor-pointer"
-                        onclick="location.href='finishing_sp_1.php?finish_id=<?php echo $finish_id ?>'">
+                        onclick="location.href='edit_sp_general_info.php?editid=<?php echo $editid ?>'">
                         <span
                             class="flex items-center justify-center w-5 h-5 me-2 text-xs border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
                             1
@@ -100,7 +105,7 @@ $sp_banner = $data['sp_banner'];
                         </svg>
                     </li>
                     <li class="flex items-center cursor-pointer"
-                        onclick="location.href='finishing_sp_3.php?finish_id=<?php echo $finish_id ?>'">
+                        onclick="location.href='edit_sp_gallery.php?editid=<?php echo $editid ?>'">
                         <span
                             class="flex items-center justify-center w-5 h-5 me-2 text-xs border border-gray-500 rounded-full shrink-0 dark:border-gray-400">
                             3
@@ -108,8 +113,12 @@ $sp_banner = $data['sp_banner'];
                         <span>Gallery</span>
                     </li>
                 </div>
-                <button class="bg-[#F56960] hover:bg-[#0791BE] text-white py-1 px-4 uppercase"
-                    type="submit" name="add-banner">NEXT</button>
+                <div class="flex items-center gap-2">
+                        <button class="bg-[#F56960] hover:bg-[#0791BE] text-white py-1 px-4 uppercase" type="submit"
+                            name="save-banner">SAVE UPDATE</button>
+                        <div class="cursor-pointer bg-green-700 text-white px-4 py-1"
+                            onclick="location.href='<?php echo $back_link; ?>'">CLOSE</div>
+                    </div>
             </ol>
 
             
@@ -134,10 +143,6 @@ $sp_banner = $data['sp_banner'];
         </section>
     </div>
     <?php if (!empty($ms)): ?>
-        <?php
-        // Set a success flag if the message contains "Add successfully."
-        $isSuccess = (strpos($ms, 'Add successfully') !== false) ? 'true' : 'false';
-        ?>
         <div id="messageModal" class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
             <div class="bg-white p-6 rounded-lg shadow-lg text-center max-w-sm w-full">
                 <h2 class="text-2xl font-bold mb-4">Message</h2>
@@ -150,15 +155,11 @@ $sp_banner = $data['sp_banner'];
 
         <script>
             document.getElementById('closeButton').addEventListener('click', function () {
-                // Check if the operation was successful
-                var isSuccess = <?php echo $isSuccess; ?>;
-                if (isSuccess) {
-                    // Redirect to finishing_sp_3.php if success
-                    window.location.href = 'finishing_sp_3.php?finish_id=<?php echo $finish_id ?>';
-                } else {
-                    // Stay on the same page if error
-                    window.location.href = 'finishing_sp_2.php?finish_id=<?php echo $finish_id ?>';
-                }
+                // Hide the popup
+                document.getElementById('messageModal').style.display = 'none';
+                // Refresh the page after closing the popup
+                window.location.href = "edit_sp_featured_image.php?editid=<?php echo $editid ?>";
             });
         </script>
-    <?php endif; ?>
+    <?php endif;
+    include 'footer.php'; ?>
