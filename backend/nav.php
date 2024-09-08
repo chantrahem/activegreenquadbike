@@ -11,4 +11,5 @@
     <a href="about.php" class="block p-4 hover:bg-gray-700">About</a>
     <a href="contact_social.php" class="block p-4 hover:bg-gray-700">Contact & Social</a>
     <a href="user.php" class="block p-4 hover:bg-gray-700">Users</a>
+    <a href="../" target="_blank" class="block p-4 hover:bg-gray-700">View Website</a>
 </nav>
