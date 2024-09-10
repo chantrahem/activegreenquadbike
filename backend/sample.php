@@ -1,5 +1,5 @@
 <?php include 'header.php' ?>
-<title>Sticky Background</title>
+<title>Sample</title>
 </head>
 
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
@@ -12,7 +12,7 @@
     <div class="flex-1 p-6" style="margin-left: 256px;">
         <header class="flex items-center justify-between fixed top-0 p-4 bg-gray-700 text-white"
             style="width: calc(100% - 256px);">
-            <h1 class="text-2xl font-bold">Add New Service</h1>
+            <h1 class="text-2xl font-bold">Add New Sample</h1>
             <?php include 'sign-out.php' ?>
         </header>
         <div class="" style="height: 80px;">&nbsp;</div>

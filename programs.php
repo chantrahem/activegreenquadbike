@@ -6,7 +6,7 @@ $sticky_banner_home = $about_data['sticky_banner_home'];
 </head>
 
 <body class="w-full text-lg">
-    <div class="text-white h-[600px] relative bg-[#0791BE]">
+    <div class="text-white h-[600px] relative bg-[#043927]">
         <!-- main menu -->
         <?php
         include 'templates/top-bar.php';
@@ -15,9 +15,9 @@ $sticky_banner_home = $about_data['sticky_banner_home'];
         <!-- end main menu -->
         <div class="w-full lg:w-[1141px] h-[600px] m-auto text-center">
             <div
-                class="h-[600px] w-full flex flex-col items-center justify-center pb-16 lg:pb-56 px-4 lg:px-0 uppercase">
-                <h1 class="text-4xl lg:text-6xl font-bold">Programs</h1>
-                <spa class="font-semibold text-4xl">Villages & Sunset Tours</spa>
+                class="h-[600px] w-full lg:w-[600px] m-auto flex flex-col items-center justify-center pb-16 lg:pb-56 px-4 lg:px-0">
+                <h1 class="text-4xl lg:text-6xl font-bold uppercase">Programs</h1>
+                <!-- <spa class="">Our Jeep Programs are designed to suit every type of traveler. Whether you're a history enthusiast, a nature lover, or an adventure seeker, we have the perfect tour for you.</spa> -->
             </div>
         </div>
     </div>

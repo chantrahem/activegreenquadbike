@@ -11,7 +11,7 @@ $sticky_banner_home = $about_data['sticky_banner_home'];
 </head>
 
 <body class="w-full text-lg">
-    <div class="text-white h-[600px] relative bg-[#0791BE]">
+    <div class="text-white h-[600px] relative bg-[#043927]">
         <!-- main menu -->
         <?php
         include 'templates/top-bar.php';
@@ -32,7 +32,7 @@ $sticky_banner_home = $about_data['sticky_banner_home'];
             <div class="bg-[#F56960] px-8 h-[2px] rounded-full">&nbsp;</div>
             <div class="text-[#F56960] uppercase font-bold">Get In Touch</div>
         </div>
-        <div class="text-2xl font-semibold uppercase pb-8">Contact us now to get more information
+        <div class="text-2xl pb-8">Have questions or ready to book your adventure? We’re here to help!
         </div>
         <form action="send-contact-form.php" method="post">
             <div class="mb-4"><input required class="w-full p-4 outline-none focus:outline-none border border-[#F56960]"

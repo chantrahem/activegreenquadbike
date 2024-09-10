@@ -36,7 +36,7 @@ if (is_null($book_url) || $book_url == '') {
 
 <body class="w-full text-lg">
     <div class="text-white h-screen lg:h-[800px]"
-        style="background: #0791BE url(sources/images/<?php echo $banner; ?>); background-repeat: no-repeat; background-position: center; background-size: cover;">
+        style="background: #043927 url(sources/images/<?php echo $banner; ?>); background-repeat: no-repeat; background-position: center; background-size: cover;">
         <div class="relative h-screen lg:h-[800px]">
             <?php
             include 'templates/top-bar.php';

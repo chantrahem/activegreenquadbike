@@ -1,34 +1,50 @@
 <?php
 include 'header.php';
-
 // Initialize message
 $msg = "";
+$user_id = "";
 
-// Check if 'delete' parameter is present and sanitize user input
+// Check if 'delete' parameter is present
 if (isset($_GET['delete'])) {
-    $user_id = $_GET['delete'];
-    $getuser = "SELECT * FROM users WHERE user_id=" . $user_id;
-    $u_result = $db->query($getuser);
-    $u_data = $u_result->fetch_assoc();
-    $login_id = $u_data['user_id'];
+    $user_id = filter_input(INPUT_GET, 'delete', FILTER_SANITIZE_NUMBER_INT);
 
-    if ($login_id == $_SESSION['user_id']) {
-        $msg = "This user is currently logged in; you cannot delete it.";
-        echo renderModal($msg, 'user.php');
-        exit();
-    } else {
-        $d_user = "DELETE FROM users WHERE user_id=" . $user_id;
-        if ($db->query($d_user) === TRUE) {
-            $msg = "The user is deleted successfully";
-            echo renderModal($msg, 'user.php');
-            exit();
-        }else{
-            $msg = "Error record: " .$db->error;
+    if ($user_id) {
+        $getuser = "SELECT * FROM users WHERE user_id=" . $user_id;
+        $u_result = $db->query($getuser);
+
+        if ($u_result->num_rows > 0) {
+            $u_data = $u_result->fetch_assoc();
+            $login_id = $u_data['user_id'];
+
+            if ($login_id == $_SESSION['user_id']) {
+                $msg = "This user is currently logged in; you cannot delete it.";
+                echo renderModal($msg, 'user.php');
+                exit();
+            } else {
+                $d_user = "DELETE FROM users WHERE user_id=" . $user_id;
+                if ($db->query($d_user) === TRUE) {
+                    $msg = "The user is deleted successfully";
+                    echo renderModal($msg, 'user.php');
+                    header("Location: user.php?msg=User Deleted Successfully"); // Safe redirect
+                    exit();
+                } else {
+                    $msg = "Error deleting record: " . $db->error;
+                    echo renderModal($msg, 'user.php');
+                    exit();
+                }
+            }
+        } else {
+            $msg = "User not found";
             echo renderModal($msg, 'user.php');
             exit();
         }
+    } else {
+        $msg = "Invalid user ID";
+        echo renderModal($msg, 'user.php');
+        exit();
     }
 }
+
 function renderModal($message, $redirectUrl)
 {
     return "
@@ -55,6 +71,7 @@ function renderModal($message, $redirectUrl)
         </script>
     ";
 }
+
 ?>
 
 <title>Users</title>
@@ -64,14 +81,14 @@ function renderModal($message, $redirectUrl)
     <!-- Sidebar -->
     <aside class="w-64 bg-gray-800 text-white flex-shrink-0 fixed h-screen z-50">
         <div class="p-4 text-2xl font-bold border-b">Admin</div>
-        <?php include 'nav.php' ?>
+        <?php include 'nav.php'; ?>
     </aside>
     <!-- Main Content -->
     <div class="flex-1" style="margin-left: 256px;">
         <header class="flex items-center justify-between fixed top-0 p-4 bg-gray-700 text-white"
             style="width: calc(100% - 256px);">
             <h1 class="text-2xl font-bold">Users</h1>
-            <?php include 'sign-out.php' ?>
+            <?php include 'sign-out.php'; ?>
         </header>
         <div class="" style="height: 80px;">&nbsp;</div>
         <section class="p-4 mx-4 bg-white shadow rounded-lg">
@@ -94,11 +111,11 @@ function renderModal($message, $redirectUrl)
                             <div>Name: <?php echo htmlspecialchars($user_fullname); ?></div>
                             <div>Email: <?php echo htmlspecialchars($user_email); ?></div>
                             <div class="flex items-center gap-2">
-                                <a href="edit_user.php?editid=<?php echo $user_id ?>"
+                                <a href="edit_user.php?editid=<?php echo $user_id; ?>"
                                     class="block text-white bg-green-600 rounded-md px-2 py-1 text-sm">Edit</a>
                                 <a href="#" class="block text-white bg-red-500 rounded-md px-2 py-1 text-sm"
-                                    data-id="<?php echo $user_id ?>" onclick="confirmDelete(this)">Delete</a>
-                                <a href="change_user_password.php?change_id=<?php echo $user_id ?>"
+                                    data-id="<?php echo $user_id; ?>" onclick="confirmDelete(this)">Delete</a>
+                                <a href="change_user_password.php?change_id=<?php echo $user_id; ?>"
                                     class="block text-white bg-gray-600 rounded-md px-2 py-1 text-sm">Change Password</a>
                             </div>
                         </div>
@@ -131,7 +148,8 @@ function renderModal($message, $redirectUrl)
             modal.classList.remove('hidden'); // Show modal
 
             confirmBtn.onclick = function () {
-                window.location.href = `user.php?delete=${userId}`; // Redirect to delete
+                const url = `user.php?delete=${userId}`; // Correctly prepare the URL with the user ID
+                window.location.href = url; // Redirect to delete
             };
         }
 
@@ -141,4 +159,4 @@ function renderModal($message, $redirectUrl)
         }
     </script>
 
-    <?php include 'footer.php' ?>
+    <?php include 'footer.php'; ?>

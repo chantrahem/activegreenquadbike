@@ -14,7 +14,7 @@ $quad_description = $about_data['sp_description'];
 </head>
 
 <body class="w-full text-lg">
-    <div class="text-white h-[600px] relative bg-[#0791BE]">
+    <div class="text-white h-[600px] relative bg-[#043927]">
         <!-- main menu -->
         <?php
         include 'templates/top-bar.php';
@@ -23,9 +23,9 @@ $quad_description = $about_data['sp_description'];
         <!-- end main menu -->
         <div class="w-full lg:w-[1141px] h-[600px] m-auto text-center">
             <div
-                class="h-[600px] w-full flex flex-col items-center justify-center pb-16 lg:pb-56 px-4 lg:px-0 uppercase">
-                <h1 class="text-4xl lg:text-6xl font-bold">Services</h1>
-                <spa class="font-semibold text-4xl">What can we serve you?</spa>
+                class="h-[600px] w-full lg:w-[600px] m-auto flex flex-col items-center justify-center pb-16 lg:pb-56 px-4 lg:px-0">
+                <h1 class="text-4xl lg:text-6xl font-bold uppercase">Services</h1>
+                <!-- <spa class="">At Jeep Angkor Adventure, we offer a variety of services to make your Cambodian adventure truly exceptional.</spa> -->
             </div>
         </div>
     </div>

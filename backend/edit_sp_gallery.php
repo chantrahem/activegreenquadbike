@@ -83,7 +83,7 @@ if (isset($_POST['delete'])) {
         $ms = "<p class='text-red-500'>Sorry, the file does not exist.</p>";
     }
     // Refresh the page after deletion
-    header("Location: finishing_sp_3.php?editid=$editid&delete_status=1");
+    header("Location: edit_sp_gallery.php?editid=$editid&delete_status=1");
     exit();
 }
 ?>
@@ -157,7 +157,7 @@ if (isset($_POST['delete'])) {
 
             <section class="pt-8">
                 <h2 class="text-2xl font-bold mb-4">Select images to upload</h2>
-                <form action="finishing_sp_3.php?editid=<?php echo $editid; ?>" method="POST"
+                <form action="edit_sp_gallery.php?editid=<?php echo $editid; ?>" method="POST"
                     enctype="multipart/form-data" class="bg-white p-6 rounded-lg shadow-md">
                     <input type="file" name="images[]" multiple accept="image/*"
                         class="block w-full px-4 py-2 mb-4 border rounded-lg" />
@@ -183,7 +183,7 @@ if (isset($_POST['delete'])) {
                             <div class="relative image-container">
                                 <img src="<?php echo $image_dir . htmlspecialchars($image_name); ?>" alt="Uploaded Image"
                                     class="w-full h-auto rounded-lg shadow-md">
-                                <form action="finishing_sp_3.php?editid=<?php echo $editid; ?>" method="POST"
+                                <form action="edit_sp_gallery.php?editid=<?php echo $editid; ?>" method="POST"
                                     class="absolute top-0 right-0 p-2">
                                     <input type="hidden" name="image_name" value="<?php echo htmlspecialchars($image_name); ?>">
                                     <button type="submit" name="delete"
@@ -209,3 +209,4 @@ if (isset($_POST['delete'])) {
             });
         });
     </script>
+   <?php include 'footer.php'; ?>

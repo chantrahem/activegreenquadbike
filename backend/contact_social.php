@@ -91,7 +91,7 @@ if (isset($_POST['save-contact'])) {
                         </div>
                         <div>
                             <div class="mb-2 font-semibold">Phone 2:</div>
-                            <div class="mb-4"><input required class="w-full p-4 outline-none focus:outline-none border"
+                            <div class="mb-4"><input class="w-full p-4 outline-none focus:outline-none border"
                                     type="text" name="phone_2" id="phone_2" value="<?php echo $phone_2; ?>"></div>
                         </div>
                         <div>
@@ -104,17 +104,17 @@ if (isset($_POST['save-contact'])) {
                     <div class="grid grid-cols-3 gap-4">
                         <div>
                             <div class="mb-2 font-semibold">Telegram:</div>
-                            <div class="mb-4"><input required class="w-full p-4 outline-none focus:outline-none border"
+                            <div class="mb-4"><input  class="w-full p-4 outline-none focus:outline-none border"
                                     type="text" name="telegram" id="telegram" value="<?php echo $telegram; ?>"></div>
                         </div>
                         <div>
                             <div class="mb-2 font-semibold">WhatsApp:</div>
-                            <div class="mb-4"><input required class="w-full p-4 outline-none focus:outline-none border"
+                            <div class="mb-4"><input  class="w-full p-4 outline-none focus:outline-none border"
                                     type="text" name="whatsapp" id="whatsapp" value="<?php echo $whatsapp; ?>"></div>
                         </div>
                         <div>
                             <div class="mb-2 font-semibold">WeChat:</div>
-                            <div class="mb-4"><input required class="w-full p-4 outline-none focus:outline-none border"
+                            <div class="mb-4"><input  class="w-full p-4 outline-none focus:outline-none border"
                                     type="text" name="wechat" id="wechat" value="<?php echo $wechat; ?>"></div>
                         </div>
                     </div>
@@ -124,34 +124,34 @@ if (isset($_POST['save-contact'])) {
                     <div class="border rounded-md p-4 flex flex-col gap-4">
                         <div class="flex items-center gap-4">
                             <label class="w-32">Facebook link</label>
-                            <input required class="w-full p-4 outline-none focus:outline-none border" type="text"
+                            <input  class="w-full p-4 outline-none focus:outline-none border" type="text"
                                 name="facebook" id="facebook" value="<?php echo $facebook; ?>">
                         </div>
                         <div class="flex items-center gap-4">
                             <label class="w-32">Instagram link</label>
-                            <input required class="w-full p-4 outline-none focus:outline-none border" type="text"
+                            <input  class="w-full p-4 outline-none focus:outline-none border" type="text"
                                 name="instagram" id="instagram" value="<?php echo $instagram; ?>">
                         </div>
                         <div class="flex items-center gap-4">
                             <label class="w-32">Linkedin link</label>
-                            <input required class="w-full p-4 outline-none focus:outline-none border" type="text"
+                            <input  class="w-full p-4 outline-none focus:outline-none border" type="text"
                                 name="linkedin" id="linkedin" value="<?php echo $linkedin; ?>">
                         </div>
                     </div>
                     <div class="border rounded-md p-4 flex flex-col gap-4">
                         <div class="flex items-center gap-4">
                             <label class="w-32">TikTok link</label>
-                            <input required class="w-full p-4 outline-none focus:outline-none border" type="text"
+                            <input  class="w-full p-4 outline-none focus:outline-none border" type="text"
                                 name="tiktok" id="tiktok" value="<?php echo $tiktok; ?>">
                         </div>
                         <div class="flex items-center gap-4">
                             <label class="w-32">Tripadvisor link</label>
-                            <input required class="w-full p-4 outline-none focus:outline-none border" type="text"
+                            <input  class="w-full p-4 outline-none focus:outline-none border" type="text"
                                 name="tripadvisor" id="tripadvisor" value="<?php echo $tripadvisor; ?>">
                         </div>
                         <div class="flex items-center gap-4">
                             <label class="w-32">Google link</label>
-                            <input required class="w-full p-4 outline-none focus:outline-none border" type="text"
+                            <input  class="w-full p-4 outline-none focus:outline-none border" type="text"
                                 name="google" id="google" value="<?php echo $google; ?>">
                         </div>
                     </div>

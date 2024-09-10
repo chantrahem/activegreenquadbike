@@ -52,7 +52,7 @@ if (isset($_POST['save'])) {
 
 ?>
 
-<title>Quad Bike Service</title>
+<title>Service</title>
 </head>
 
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
@@ -65,7 +65,7 @@ if (isset($_POST['save'])) {
     <div class="flex-1" style="margin-left: 256px;">
         <header class="flex items-center justify-between fixed top-0 p-4 bg-gray-700 text-white"
             style="width: calc(100% - 256px);">
-            <h1 class="text-2xl font-bold">Quad Bike Service</h1>
+            <h1 class="text-2xl font-bold">Service</h1>
             <?php include 'sign-out.php' ?>
         </header>
         <div class="" style="height: 80px;">&nbsp;</div>
@@ -88,7 +88,7 @@ if (isset($_POST['save'])) {
                     <div>
                         <label for="uploadImage" class="cursor-pointer">
                             <img class="border" id="uploadPreview" src="../sources/images/<?php echo $image_quad; ?>"
-                                style="width:100%;">
+                                style="max-height: 600px; width:auto; overflow: hidden;">
                             <input id="uploadImage" type="file" name="uploadImage" onchange="PreviewImage();"
                                 class="hidden" />
                         </label>

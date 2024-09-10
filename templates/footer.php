@@ -1,4 +1,4 @@
-<div class="bg-[#383838] text-white py-16 px-4 lg:px-0">
+<div class="bg-[#043927] text-white py-16 px-4 lg:px-0">
     <div class="lg:grid lg:grid-cols-3 w-full lg:w-[1200px] lg:m-auto font-mon gap-x-16">
         <div>
             <div class="text-2xl font-semibold pb-8">Progams</div>
@@ -182,7 +182,7 @@
         </div>
     </div>
 </div>
-<div class="bg-[#404040] text-center py-8 text-white font-rob text-sm">
+<div class="bg-[#043927] text-center py-8 text-white font-rob text-sm border-t">
     <?php
     $year = date("Y");
     echo $year;

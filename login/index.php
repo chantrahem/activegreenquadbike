@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Master Admin login
         $_SESSION['loggedin'] = 'Master Admin';
         $_SESSION['UserID'] = '0';
+        $_SESSION['user_fullname'] = 'Master Admin';
         header("Location: ../backend/dashboard.php");
         exit();
     } elseif (empty($user) && empty($pass)) {

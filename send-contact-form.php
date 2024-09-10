@@ -35,7 +35,7 @@ if (isset($_POST["contact-us"])) {
         $mail->SMTPSecure = 'ssl';
         $mail->Port = 465;
 
-        $mail->setFrom('alertemail168@gmail.com', 'Active Green Quad Bike Notification');
+        $mail->setFrom('alertemail168@gmail.com', 'Jeep Angkor Adventure - Notification');
         $mail->addAddress($email_address);
         $mail->addReplyTo($email, $name);
 

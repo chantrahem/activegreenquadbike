@@ -13,7 +13,7 @@
                 <div class="flex items-center mt-8 space-x-4  justify-center lg:justify-start">
                     <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
                         <button onclick="location.href='/programs.php'" class="btn-primary">
-                            Programs</button>
+                            Jeep Programs</button>
                         <button onclick="location.href='/gallery.php'" class="btn-primary">
                             Gallery</button>
                     </div>

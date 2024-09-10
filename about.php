@@ -11,7 +11,7 @@ $sticky_banner_home = $about_data['sticky_banner_home'];
 </head>
 
 <body class="w-full text-lg">
-    <div class="text-white h-[600px] relative bg-[#0791BE]">
+    <div class="text-white h-[600px] relative bg-[#043927]">
         <!-- main menu -->
         <?php
         include 'templates/top-bar.php';

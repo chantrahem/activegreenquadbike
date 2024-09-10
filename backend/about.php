@@ -279,7 +279,7 @@ if (isset($_POST['save-about'])) {
                 </div>
                 <div class="mb-2 font-semibold">Description:</div>
                 <div class="mb-4"><textarea required class="w-full p-4 outline-none focus:outline-none border"
-                        name="about_description" id="myTextarea" cols="30"
+                        name="about_description" id="about_description" cols="30"
                         rows="10"><?php echo $about_description; ?></textarea>
                 </div>
                 <button class="bg-[#F56960] hover:bg-[#0791BE] text-white py-2 px-8 mt-4 uppercase w-full lg:w-auto"

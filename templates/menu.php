@@ -4,5 +4,6 @@
     <li class="cursor-pointer" onclick="location.href='/services.php'">Services</li>
     <li class="cursor-pointer" onclick="location.href='/programs.php'">Programs</li>
     <li class="cursor-pointer" onclick="location.href='/gallery.php'">Gallery</li>
+    <li class="cursor-pointer" onclick="location.href='/video.php'">Videos</li>
     <li class="cursor-pointer" onclick="location.href='/contact.php'">Contact</li>
 </ul>

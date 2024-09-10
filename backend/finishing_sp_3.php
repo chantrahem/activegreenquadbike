@@ -6,6 +6,11 @@ $sp = "SELECT * FROM services_and_programs WHERE sp_id = $finish_id";
 $result = $db->query($sp);
 $data = $result->fetch_assoc();
 $category_list = $data['category_list'];
+if($category_list == 'Service'){
+    $back_link = 'service.php';
+}else{
+    $back_link = 'program.php';
+}
 $sp_gallery_image_path = $data['sp_gallery_image_path'];
 
 if (empty($sp_gallery_image_path)) {

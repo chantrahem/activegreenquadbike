@@ -5,7 +5,7 @@ $db->close();
 <script>
 
     tinymce.init({
-        selector: '#sp_price, #sp_departure_time, #sp_description, #sp_inclusion, #sp_notes',
+        selector: '#sp_price, #sp_departure_time, #sp_description, #sp_inclusion, #sp_notes, #about_description, #myTextArea',
         menubar: false,
         statusbar: false,
         plugins: 'lists autoresize',

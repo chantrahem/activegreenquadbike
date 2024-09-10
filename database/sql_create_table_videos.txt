@@ -1,0 +1,5 @@
+CREATE TABLE video (
+    video_id int NOT NULL AUTO_INCREMENT,
+    youtube_link varchar(255),
+    PRIMARY KEY (video_id)
+);

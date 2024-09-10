@@ -162,3 +162,5 @@ $sp_banner = $data['sp_banner'];
             });
         </script>
     <?php endif; ?>
+
+    <?php include 'footer.php' ?>

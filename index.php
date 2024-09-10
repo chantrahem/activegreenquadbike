@@ -103,7 +103,7 @@ $quad_description = $about_data['sp_description'];
                         <div class="flex justify-center  rounded-md shadow-lg">
                             <div class="h-full relative">
                                 <div class="w-full h-[250px] rounded-t-md"
-                                    style="background: #3A6732 url(sources/images/<?php echo $image_quad ?>); background-repeat: no-repeat; background-position: center; background-size: cover;">
+                                    style="background: #043927 url(sources/images/<?php echo $image_quad ?>); background-repeat: no-repeat; background-position: center; background-size: cover;">
                                 </div>
                                 <div class="p-8">
                                     <h2 class="text-center text-2xl font-semibold mb-4 uppercase"><?php echo $quad_name ?></h2>
@@ -113,7 +113,7 @@ $quad_description = $about_data['sp_description'];
 
                                 </div>
                                 <button onclick="location.href='/programs.php'"
-                                    class="absolute bottom-0 left-0 py-2 px-4 justify-center bg-[#3A6732] hover:bg-[#F56960] w-full rounded-b-md text-white text-sm uppercase">Read
+                                    class="absolute bottom-0 left-0 py-2 px-4 justify-center bg-[#043927] hover:bg-[#F56960] w-full rounded-b-md text-white text-sm uppercase">Read
                                     more...</button>
                             </div>
                         </div>
@@ -135,7 +135,7 @@ $quad_description = $about_data['sp_description'];
                                 <div class="flex justify-center  rounded-md shadow-lg">
                                     <div class="h-full relative">
                                         <div class="w-full h-[250px] rounded-t-md"
-                                            style="background: #3A6732 url(sources/images/<?php echo $banner ?>); background-repeat: no-repeat; background-position: center; background-size: cover;">
+                                            style="background: #043927 url(sources/images/<?php echo $banner ?>); background-repeat: no-repeat; background-position: center; background-size: cover;">
                                         </div>
                                         <div class="p-8">
                                             <h2 class="text-center text-2xl font-semibold mb-4 uppercase">
@@ -147,7 +147,7 @@ $quad_description = $about_data['sp_description'];
                                         </div>
                                         <button
                                             onclick="location.href='/services_and_programs_details.php?spid=<?php echo $sp_id; ?>'"
-                                            class="absolute bottom-0 left-0 py-2 px-4 justify-center bg-[#3A6732] hover:bg-[#F56960] w-full rounded-b-md text-white text-sm uppercase">Read
+                                            class="absolute bottom-0 left-0 py-2 px-4 justify-center bg-[#043927] hover:bg-[#F56960] w-full rounded-b-md text-white text-sm uppercase">Read
                                             more...</button>
                                     </div>
                                 </div>
@@ -182,8 +182,7 @@ $quad_description = $about_data['sp_description'];
                     <h3 class="uppercase text-[#F56960] font-semibold text-sm">Our Popular Programs
                     </h3>
                 </div>
-                <div class="w-full uppercase font-semibold text-center text-2xl">Villages & Sunset Tours
-                </div>
+                <div class="w-full uppercase font-semibold text-center text-2xl"><?php echo $about_highlight; ?></div>
                 <div class="flex flex-col lg:grid lg:grid-cols-2 gap-8 lg:gap-16 mt-8 px-4 lg:px-0">
                     <?php
                     $sp2 = "SELECT * FROM services_and_programs WHERE category_list = 'Program' AND is_featured = 'Yes'";
@@ -202,7 +201,7 @@ $quad_description = $about_data['sp_description'];
                             ?>
                             <div class="flex flex-col lg:grid lg:grid-cols-2 rounded-md shadow-xl border">
                                 <div class="w-full h-[250px] lg:h-[300px] rounded-t-md lg:rounded-tr-none lg:rounded-l-md"
-                                    style="background: #3A6732 url(sources/images/<?php echo $banner ?>); background-repeat: no-repeat; background-position: center; background-size: cover;">
+                                    style="background: #043927 url(sources/images/<?php echo $banner ?>); background-repeat: no-repeat; background-position: center; background-size: cover;">
                                 </div>
                                 <div class="relative">
                                     <div class="p-8">
@@ -215,7 +214,7 @@ $quad_description = $about_data['sp_description'];
                                     </div>
                                     <button
                                         onclick="location.href='/services_and_programs_details.php?spid=<?php echo $sp_id; ?>'"
-                                        class="w-full lg:w-auto absolute bottom-0 right-0 py-2 px-8 justify-end bg-[#3A6732] hover:bg-[#F56960] rounded-b-md lg:rounded-b-none lg:rounded-br-md text-white text-sm uppercase">Read
+                                        class="w-full lg:w-auto absolute bottom-0 right-0 py-2 px-8 justify-end bg-[#043927] hover:bg-[#F56960] rounded-b-md lg:rounded-b-none lg:rounded-br-md text-white text-sm uppercase">Read
                                         more...</button>
                                 </div>
 

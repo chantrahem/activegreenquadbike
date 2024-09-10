@@ -4,18 +4,18 @@ $ms = '';
 $editid = $_GET['editid'];
 
 if (isset($_POST['save-update'])) {
-    $sp_name = $_POST['sp_name'];
-    $sp_sub_name = $_POST['sp_sub_name'];
-    $sp_price = $_POST['sp_price'];
-    $sp_departure_time = $_POST['sp_departure_time'];
-    $sp_short_description = $_POST['sp_short_description'];
-    $sp_description = $_POST['sp_description'];
-    $sp_inclusion = $_POST['sp_inclusion'];
-    $sp_notes = $_POST['sp_notes'];
-    $is_featured = $_POST['is_featured'];
-    $book_url = $_POST['book_url'];
+    $sp_name = mysqli_real_escape_string($db, $_POST['sp_name']);
+    $sp_sub_name = mysqli_real_escape_string($db, $_POST['sp_sub_name']);
+    $sp_price = mysqli_real_escape_string($db, $_POST['sp_price']);
+    $sp_departure_time = mysqli_real_escape_string($db, $_POST['sp_departure_time']);
+    $sp_short_description = mysqli_real_escape_string($db, $_POST['sp_short_description']);
+    $sp_description = mysqli_real_escape_string($db, $_POST['sp_description']);
+    $sp_inclusion = mysqli_real_escape_string($db, $_POST['sp_inclusion']);
+    $sp_notes = mysqli_real_escape_string($db, $_POST['sp_notes']);
+    $is_featured = mysqli_real_escape_string($db, $_POST['is_featured']);
+    $book_url = mysqli_real_escape_string($db, $_POST['book_url']);
 
-    $update_sql = "UPDATE services_and_programs SET sp_name = '$sp_name', sp_sub_name = '$sp_sub_name', sp_price = '$sp_price', sp_departure_time = '$sp_departure_time', sp_short_description = '$sp_short_description', sp_description = '$sp_description', sp_inclusion = '$sp_inclusion', sp_notes = '$sp_notes', is_featured = '$is_featured', book_url = '$book_url'  WHERE sp_id = $editid";
+    $update_sql = "UPDATE services_and_programs SET sp_name = '$sp_name', sp_sub_name = '$sp_sub_name', sp_price = '$sp_price', sp_departure_time = '$sp_departure_time', sp_short_description = '$sp_short_description', sp_description = '$sp_description', sp_inclusion = '$sp_inclusion', sp_notes = '$sp_notes', is_featured = '$is_featured', book_url = '$book_url' WHERE sp_id = $editid";
 
     if ($db->query($update_sql) === TRUE) {
         $ms = "Record updated successfully.";
@@ -23,6 +23,7 @@ if (isset($_POST['save-update'])) {
         $ms = "Error updating record: " . $db->error;
     }
 }
+
 
 
 $sp = "SELECT * FROM services_and_programs WHERE sp_id = $editid";

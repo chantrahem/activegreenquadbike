@@ -1,6 +1,6 @@
-<?php include 'header.php';
+<?php
+include 'header.php';
 $ms = '';
-// Define image folder
 $image_dir = "../sources/images/gallery/";
 
 // Handle image upload
@@ -8,31 +8,37 @@ if (isset($_POST['upload'])) {
     $allowed_types = ['jpg', 'jpeg', 'png', 'gif'];
     $uploaded_files = $_FILES['images'];
 
+    $upload_success = false; // Track if at least one file is uploaded
+
     for ($i = 0; $i < count($uploaded_files['name']); $i++) {
-        if (!empty($uploaded_files["tmp_name"][$i])) {  // Check if the temp name is not empty
+        if (!empty($uploaded_files["tmp_name"][$i])) {
             $imageFileType = strtolower(pathinfo($uploaded_files["name"][$i], PATHINFO_EXTENSION));
             $check = getimagesize($uploaded_files["tmp_name"][$i]);
 
-            // Check if image file is a real image and if it is an allowed type
             if ($check !== false && in_array($imageFileType, $allowed_types)) {
                 // Generate a new name for the image using the current date and time
-                $new_filename = 'active_green_quad_bike_' . date('Ymd_His') . '.' . $imageFileType;
+                $new_filename = 'active_green_quad_bike_' . date('Ymd_His') . '_' . $i . '.' . $imageFileType;
                 $target_file = $image_dir . $new_filename;
 
-                // Move the uploaded file to the target directory
                 if (move_uploaded_file($uploaded_files["tmp_name"][$i], $target_file)) {
-                    $ms = "<p class='text-green-500'>The file " . htmlspecialchars($new_filename) . " has been uploaded.</p>";
+                    $ms .= "<p class='text-green-500'>The file " . htmlspecialchars($new_filename) . " has been uploaded.</p>";
+                    $upload_success = true;
                 } else {
-                    $ms = "<p class='text-red-500'>Sorry, there was an error uploading " . htmlspecialchars($uploaded_files["name"][$i]) . ".</p>";
+                    $ms .= "<p class='text-red-500'>Sorry, there was an error uploading " . htmlspecialchars($uploaded_files["name"][$i]) . ".</p>";
                 }
             } else {
-                $ms = "<p class='text-red-500'>" . htmlspecialchars($uploaded_files["name"][$i]) . " is not an allowed file type or is not an image.</p>";
+                $ms .= "<p class='text-red-500'>" . htmlspecialchars($uploaded_files["name"][$i]) . " is not an allowed file type or is not an image.</p>";
             }
         } else {
-            $ms = "<p class='text-red-500'>No file selected or the file is invalid.</p>";
+            $ms .= "<p class='text-red-500'>No file selected or the file is invalid.</p>";
         }
     }
 
+    // Trigger page refresh after successful upload
+    if ($upload_success) {
+        echo "<script>window.location.href='gallery.php';</script>";
+        exit();
+    }
 }
 
 // Handle image deletion
@@ -41,11 +47,14 @@ if (isset($_POST['delete'])) {
     if (file_exists($file_to_delete)) {
         unlink($file_to_delete);
         $ms = "<p class='text-green-500'>The file " . htmlspecialchars($_POST['image_name']) . " has been deleted.</p>";
+        echo "<script>window.location.href='gallery.php';</script>";
+        exit();
     } else {
         $ms = "<p class='text-red-500'>Sorry, the file does not exist.</p>";
     }
 }
 ?>
+
 <style>
     /* Initially hide the delete button */
     .delete-button {
@@ -69,7 +78,7 @@ if (isset($_POST['delete'])) {
     </aside>
     <!-- Main Content -->
     <div class="flex-1" style="margin-left: 256px;">
-        <header class="flex items-center justify-between fixed top-0 p-4 bg-gray-700 text-white"
+        <header class="flex items-center justify-between fixed top-0 p-4 bg-gray-700 text-white z-50"
             style="width: calc(100% - 256px);">
             <h1 class="text-2xl font-bold">Gallery</h1>
             <?php include 'sign-out.php' ?>
@@ -96,16 +105,15 @@ if (isset($_POST['delete'])) {
             <!-- Gallery Images -->
             <section>
                 <h2 class="text-2xl font-bold my-4">Uploaded Images</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 gap-4">
+                <div class="grid grid-flow-row-dense grid-cols-4 gap-4">
                     <?php
-
-                    // Display images
+                    // Display images in the folder
                     $images = glob($image_dir . "*.{jpg,jpeg,png,gif,JPG,JPEG,PNG,GIF}", GLOB_BRACE);
 
                     foreach ($images as $image) {
                         $image_name = basename($image);
                         echo "<div class='relative image-container'>";
-                        echo "<img src='" . $image . "' alt='Gallery Image' class='w-full h-auto object-cover rounded-lg shadow-lg'>";
+                        echo "<img src='" . $image . "' alt='Gallery Image' class='w-full h-auto object-cover rounded-lg shadow-lg' style='aspect-ratio: auto; z-index: -1;'>";
                         echo "<form action='gallery.php' method='POST' class='absolute top-2 right-2 delete-button'>";
                         echo "<input type='hidden' name='image_name' value='" . $image_name . "'>";
                         echo "<button type='submit' name='delete' class='bg-red-500 text-white px-2 py-1 rounded'>Delete</button>";
@@ -115,6 +123,7 @@ if (isset($_POST['delete'])) {
                     ?>
                 </div>
             </section>
+
         </section>
 
     </div>
